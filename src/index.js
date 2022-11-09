@@ -4,10 +4,34 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/**conectar la app por URL */
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+
+import Servicios from './components/Servicios';
+import Pagos from './components/Pagos';
+import Inicio from './components/Inicio';
+import Page404 from './components/Page404';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+    <Routes>
+                  <Route path='/' element={<App />} >
+                    <Route index
+                          element={<Inicio />}
+                    />
+                    <Route path='Servicios' element={<Servicios />} />
+                    <Route path='Pagos' element={<Pagos />} >
+                    </Route>
+                    <Route path='*'
+                        element={
+                          <Page404/>
+                        }>
+                    </Route>
+                  </Route>
+            </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
