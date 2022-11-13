@@ -11,6 +11,7 @@ import Servicios from './components/Servicios';
 import Pagos from './components/Pagos';
 import Inicio from './components/Inicio';
 import Page404 from './components/Page404';
+import Formulario from './components/Formulario';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
                     <Route path='Servicios' element={<Servicios />} />
                     <Route path='Pagos' element={<Pagos />} >
                     </Route>
+                    <Route path='Formulario' element={<Formulario />} />
                     <Route path='*'
                         element={
                           <Page404/>
