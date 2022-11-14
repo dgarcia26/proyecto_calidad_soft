@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import listaTiquet from './Formulario'
+import { collection, onSnapshot } from 'firebase/firestore';
+import {db} from '../firebase';
 
 
 const Servicios = () => {
+
+  const [listaTiquet, setlistaTiquet] = useState([])
+
+  useEffect(()=>{
+    const obtenerDatos = async () => {
+        try{
+            await onSnapshot(collection(db, "Tiquet"), (query)=>{
+                setlistaTiquet(query.docs.map((doc)=>({...doc.data(), id:doc.id})))
+            })
+        }catch(error){
+            console.log(error)
+        }
+    }
+    obtenerDatos();
+  }, [])
+
+  
+
+
   return (
     <div>
       <h1>Servicios</h1>
@@ -15,40 +35,31 @@ const Servicios = () => {
                 {
                      listaTiquet.map(item => (
                          <li className="list-group-item card" key={item.id}>
-                            
-                            
-                            <div className="row">
-                                <div className="col-8">
-                                    <h6 className="lead">Nombre: {item.nombrePersona}</h6>
-                                    <h6 className="lead">Apellido: {item.apellidoPersona}</h6>
-                                    <h6 className="lead">Celular: {item.celularPersona}</h6>
-                                    <h6 className="lead">Email: {item.emailPersona}</h6>
-                                    <h6 className="lead">Direccion: {item.cargoPersona}</h6>
-                                    <h6 className="lead">Ciudad: {item.despachoPersona}</h6>
-                                    <h6 className="lead">Solicitud: {item.solicitudPersona}</h6>
-                                </div>
-                            </div>  
-                                                          
-                             
+                                  
+                                    <div className="card-header">
+                                      <h5 class="card-title">{item.solicitudPersona}</h5>
+                                    </div>
+                                    <div className="card-body">
+                                      <div className="card-title">
+                                        <h6 className="lead"><b>Nombre:</b> {item.nombrePersona} {item.apellidoPersona}</h6>
+                                        <h6 className="card-text">
+                                          Solicitud: {item.solicitudPersona}
+                                        </h6>
+                                        <h6>Estado: </h6>
+                                        <button className='btn btn-outline-primary'>Ver más</button>
+                                      </div>
+                                    </div>
+                                  
                          </li>
                      ))        
                 }
-            </ul>
-          <div class="card">
-            <div class="card-header">
-              Featured
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Titulo Servicio</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <Link to="/mas"><button class="btn btn-primary">más detalles</button></Link>
-            </div>
-          </div>
+            </ul>          
         </div>
-        <div className='col-4'>
+        <div className='col-3'>
         <h3 className='container'>Nuevo Servicio</h3>
         <div className='new-serv'>
-        <Link to="/Formulario"><button type="button" class="btn btn-outline-primary sr-only">Agregar</button></Link>
+        <Link to="/Formulario"><button type="button" class="btn btn-outline-primary sr-only nuevo">+ Agregar</button></Link>
+        
         </div>
         </div>
       </div>

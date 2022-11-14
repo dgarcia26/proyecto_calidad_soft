@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {db} from '../firebase';
-import { collection, addDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom'
 
 const Formulario = () => {
@@ -16,18 +16,7 @@ const [listaTiquet, setlistaTiquet] = useState([])
 const [modoEdicion, setModoEdicion] = useState(false)
 const [id, setId] = useState('')
 
-useEffect(()=>{
-  const obtenerDatos = async () => {
-      try{
-          await onSnapshot(collection(db, "Tiquet"), (query)=>{
-              setlistaTiquet(query.docs.map((doc)=>({...doc.data(), id:doc.id})))
-          })
-      }catch(error){
-          console.log(error)
-      }
-  }
-  obtenerDatos();
-}, [])
+
 
 //-----inicio de eliminar----------------------
 /*const eliminar = async id =>{
@@ -136,45 +125,50 @@ const cancelar = () =>{
         <div className="row">
             <div className='col-4'></div>
             <div className='col-4'>
-                {
-                    modoEdicion ? 'Editar Tiquet' : 'Agregar Tiquet'
-                }
+                
             <form className='container justify-content-center' onSubmit={modoEdicion ? editarTiquet : guardarTiquet}>
                 <h3>Nuevo Servicio</h3>
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ingrese Nombre'
-                value=""
+                value={nombre}
+                onChange={(e)=>setNombre(e.target.value)} required
                 />
                  <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ingrese Apellido'
-                value=""
+                value={apellido}
+                onChange={(e)=>setApellido(e.target.value)} required
                 />                  
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ingrese Celular'
-                value=""
+                value={celular}
+                onChange={(e)=>setCelular(e.target.value)} required
                 />
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ingrese Email'
-                value=""
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)} required
                 />
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Direccion'
-                value=""
+                value={direccion}
+                onChange={(e)=>setDireccion(e.target.value)} required
                 />
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ciudad'
-                value=""
+                value={ciudad}
+                onChange={(e)=>setCiudad(e.target.value)} required
                 />
                 <input type="text" 
                 className="form-control mb-3 text-center" 
                 placeholder='Ingrese Solicitud'
-                value=""
+                value={solicitud}
+                onChange={(e)=>setSolicitud(e.target.value)} required
                 />
                 {
                   modoEdicion ?
@@ -194,7 +188,11 @@ const cancelar = () =>{
                   className='btn btn-primary btn-block'>
                   Agregar
                   </button>
+                                   
                 }
+                <Link to="/Servicios"><button
+                          className='btn btn-dark btn-block mx-2'
+                          onClick={()=>cancelar()}>Cancelar</button></Link>
                 
             </form>
             </div>

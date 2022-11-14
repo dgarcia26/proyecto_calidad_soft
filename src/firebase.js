@@ -1,17 +1,18 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCPsLwMB_ACwrrL2NuZvwAhfb7uA1GTIhg",
-    authDomain: "calidad-soft.firebaseapp.com",
-    projectId: "calidad-soft",
-    storageBucket: "calidad-soft.appspot.com",
-    messagingSenderId: "190200106790",
-    appId: "1:190200106790:web:2c58d978d6b008754a7be7"
+    apiKey: "AIzaSyCA69Lromgeyt0CZaqxkhXH26n51d734nY",
+    authDomain: "react2-d3300.firebaseapp.com",
+    projectId: "react2-d3300",
+    storageBucket: "react2-d3300.appspot.com",
+    messagingSenderId: "867745050613",
+    appId: "1:867745050613:web:5ebb66a2e14f24ca20babc"
 };
 
 // Initialize Firebase
