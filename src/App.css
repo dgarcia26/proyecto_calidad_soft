@@ -39,3 +39,16 @@
 
 /*---Imagen carrosell inicio--*/
 
+
+/*---inicio de sesion---*/
+.form-signin {
+  width: 100%;
+  max-width: 320px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.navbar{
+  font-family: 'Arial';
+  font-size: 20px;
+}

@@ -11,6 +11,8 @@ import Servicios from './components/Servicios';
 import Pagos from './components/Pagos';
 import Inicio from './components/Inicio';
 import Page404 from './components/Page404';
+import Sesion from './components/Sesion';
+import Register from './components/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,8 +24,10 @@ root.render(
                           element={<Inicio />}
                     />
                     <Route path='Servicios' element={<Servicios />} />
-                    <Route path='Pagos' element={<Pagos />} >
-                    </Route>
+                    <Route path='Pagos' element={<Pagos />} />
+                    <Route path='Sesion' element={<Sesion />}/>
+                    <Route path='Register' element={<Register />}/>
+                    
                     <Route path='*'
                         element={
                           <Page404/>

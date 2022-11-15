@@ -17,10 +17,16 @@ const Header = () => {
                     <Link to="/" class="nav-link active" aria-current="page">Inicio</Link>
                     <Link to="/Servicios" class="nav-link">Servicios</Link>
                     <Link to="/Pagos" class="nav-link">Pagos</Link>
-                </div>
+                    
+                    <Link to="/Sesion" class="nav-link"><button type="button" class="btn btn-primary">Iniciar Sesion</button></Link>
+                    
+                    <Link to="/Register" class="nav-link"><button type="button" class="btn btn-danger">Registrarse</button></Link>
+              
+                </div>            
                 </div>
             </div>
         </nav>
+      
         <main className="App-content">
           <Outlet />
         </main>
