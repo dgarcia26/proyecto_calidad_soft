@@ -1,6 +1,7 @@
 import React from 'react'
 
 
+
 const Inicio = () => {
 
   
@@ -8,6 +9,7 @@ const Inicio = () => {
   return (
     <div class="p-3 m-0 border-0 bd-example">
       <h1>esto es el inicio</h1>
+      <hr />
       <section>
       {/*<!-- Example Code -->*/}
     

@@ -56,10 +56,29 @@
     text-transform: uppercase;
 }
 
+/*---inicio de sesion---*/
+.form-signin {
+  width: 100%;
+  max-width: 320px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.app-conten{
+    padding: 10px;
+}
+.navbar{
+  font-family: 'Arial';
+  font-size: 20px;
+}
 .nuevo {
     font-size: 20px;
     border-radius: 100px;
     width: 150px;
     height: 150px;
     text-transform: uppercase;
+}
+
+.col-9 {
+    flex: 0 0 auto;
+    width: 60%;
 }

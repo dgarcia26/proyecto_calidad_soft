@@ -29,7 +29,7 @@ const Servicios = () => {
       <h1>Servicios</h1>
       <hr />
       <div className='row'>
-        <div className="col-8">
+        <div className="col-9">
           <h3>Lista de Servicios</h3>
           <ul className="list-group">
                 {
