@@ -29,7 +29,7 @@ const Servicios = () => {
       <h1>Servicios</h1>
       <hr />
       <div className='row'>
-        <div className="col-9">
+        <div className="col-9 container">
           <h3>Lista de Servicios</h3>
           <ul className="list-group">
                 {
@@ -55,7 +55,7 @@ const Servicios = () => {
                 }
             </ul>          
         </div>
-        <div className='col-3'>
+        <div className='col-3 container'>
         <h3 className='container'>Nuevo Servicio</h3>
         <div className='new-serv'>
         <Link to="/Formulario"><button type="button" class="btn btn-outline-primary sr-only nuevo">+ Agregar</button></Link>
