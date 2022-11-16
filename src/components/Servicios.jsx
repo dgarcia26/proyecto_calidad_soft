@@ -46,7 +46,18 @@ const Servicios = () => {
                                           Solicitud: {item.solicitudPersona}
                                         </h6>
                                         <h6>Estado: </h6>
-                                        <button className='btn btn-outline-primary'>Ver más</button>
+                                        <p>
+                                          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                          Ver más
+                                          </button>
+                                        </p>
+                                        <div className='mas'>
+                                          <div class="collapse collapse" id="collapseWidthExample">
+                                            <div class="card card-body">
+                                              Persona Asignada: --------------------------
+                                            </div>
+                                          </div>
+                                        </div>                                        
                                       </div>
                                     </div>
                                   
