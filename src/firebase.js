@@ -9,17 +9,11 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
 
   apiKey: "AIzaSyDxKOdfiDwBFTzN1nRenQZXUAcdhhv7aTY",
-
   authDomain: "calidadsoft-9b09f.firebaseapp.com",
-
   projectId: "calidadsoft-9b09f",
-
   storageBucket: "calidadsoft-9b09f.appspot.com",
-
   messagingSenderId: "766731922304",
-
   appId: "1:766731922304:web:9cb22b2836b76d492def65"
-
 };
 
 
