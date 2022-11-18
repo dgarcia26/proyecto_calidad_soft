@@ -11,6 +11,7 @@ const [celular, setCelular] = useState('')
 const [email, setEmail] = useState('')
 const [direccion, setDireccion] = useState('')
 const [ciudad, setCiudad] = useState('')
+const [categoria, setCategoria] = useState('')
 const [solicitud, setSolicitud] = useState('')
 const [listaTiquet, setlistaTiquet] = useState([])
 const [modoEdicion, setModoEdicion] = useState(false)
@@ -41,13 +42,14 @@ const guardarTiquet = async (e) => {
           emailPersona: email,
           direccionPersona: direccion,
           ciudadPersona: ciudad,
+          categoriaPersona: categoria,
           solicitudPersona: solicitud,
           //agregar mas campo
           //imageUrl
       })
       setlistaTiquet([
           ...listaTiquet,
-          {nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad,
+          {nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad, categoriaPersona: categoria,
               solicitudPersona: solicitud, id:data.id}
       ])
 
@@ -57,6 +59,7 @@ const guardarTiquet = async (e) => {
       setEmail('')
       setDireccion('')
       setCiudad('')
+      setCategoria('')
       setSolicitud('')
 
   }catch(error){
@@ -78,13 +81,14 @@ const editarTiquet = async (e) => {
           emailPersona: email,
           direccionPersona: direccion,
           ciudadPersona: ciudad,
+          categoriaPersona: categoria,
           solicitudPersona: solicitud,
                     
       })
       
 
       const nuevoArray = listaTiquet.map(
-          item => item.id === id ? {id: id, nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad,
+          item => item.id === id ? {id: id, nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad, categoriaPersona: categoria,
               solicitudPersona: solicitud
           //mas iten
           } : item
@@ -97,6 +101,7 @@ const editarTiquet = async (e) => {
       setEmail('')
       setDireccion('')
       setCiudad('')
+      setCategoria('')
       setSolicitud('')
       setId('')
       setModoEdicion(false)
@@ -116,6 +121,7 @@ const cancelar = () =>{
   setEmail('')
   setDireccion('')
   setCiudad('')
+  setCategoria('')
   setSolicitud('')
   setId('')
 }
@@ -163,13 +169,20 @@ const cancelar = () =>{
                 placeholder='Ciudad'
                 value={ciudad}
                 onChange={(e)=>setCiudad(e.target.value)} required
-                />
+                />                
                 <input type="text" 
                 className="form-control mb-3 text-center" 
-                placeholder='Ingrese Solicitud'
-                value={solicitud}
-                onChange={(e)=>setSolicitud(e.target.value)} required
-                />
+                placeholder='Categoria (Nevera, Aire, PC, Electrico)' 
+                value={categoria}
+                onChange={(e)=>setCategoria(e.target.value)} required>
+                </input>
+                        
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder='Ingrese solicitud' id="floatingTextarea" value={solicitud}
+                  onChange={(e)=>setSolicitud(e.target.value)} required></textarea>
+                  <label for="floatingTextarea">Solicitud</label>                 
+                </div>
+                <br />
                 {
                   modoEdicion ?
                   (
