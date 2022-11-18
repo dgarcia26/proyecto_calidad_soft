@@ -42,6 +42,7 @@ const Servicios = () => {
                                     <div className="card-body">
                                       <div className="card-title">
                                         <h6 className="lead"><b>Nombre:</b> {item.nombrePersona} {item.apellidoPersona}</h6>
+                                        <h6>Categoria: {item.categoriaPersona}</h6>
                                         <h6 className="card-text">
                                           Solicitud: {item.solicitudPersona}
                                         </h6>

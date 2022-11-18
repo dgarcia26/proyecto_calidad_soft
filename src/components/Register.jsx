@@ -1,22 +1,213 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {db} from '../firebase';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { Link } from 'react-router-dom'
 
-const Register = () => {
+const Register = () => {const [nombre, setNombre] = useState('')
+const [apellido, setApellido] = useState('')
+const [celular, setCelular] = useState('')
+const [email, setEmail] = useState('')
+const [direccion, setDireccion] = useState('')
+const [ciudad, setCiudad] = useState('')
+const [tipo, setTipo] = useState('')
+const [profesion, setProfesion] = useState('')
+const [listaTiquet, setlistaTiquet] = useState([])
+const [modoEdicion, setModoEdicion] = useState(false)
+const [id, setId] = useState('')
+
+
+
+//-----inicio de eliminar----------------------
+/*const eliminar = async id =>{
+  try{
+      await deleteDoc(doc(db, 'Tiquet', id))
+  }catch(error){
+      console.log(error)
+  }
+}*/
+//-----fin de eliminar----------------------
+//-----inicio de guardar tiquet------------
+const guardarTiquet = async (e) => {
+  e.preventDefault()
+
+  try{
+     //const imageUrl = await obtenerImagen();
+     //console.log(imageUrl)
+      const data = await addDoc(collection(db, 'Usuario'),{
+          nombrePersona:nombre,
+          apellidoPersona: apellido,
+          celularPersona: celular,
+          emailPersona: email,
+          direccionPersona: direccion,
+          ciudadPersona: ciudad,
+          tipoPersona: tipo,
+          profesionPersona: profesion,
+          //agregar mas campo
+          //imageUrl
+      })
+      setlistaTiquet([
+          ...listaTiquet,
+          {nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad, tipoPersona: tipo,
+              profesionPersona: profesion, id:data.id}
+      ])
+
+      setNombre('')
+      setApellido('')
+      setCelular('')
+      setEmail('')
+      setDireccion('')
+      setCiudad('')
+      setTipo('')
+      setProfesion('')
+
+  }catch(error){
+      console.log(error)
+  }
+}
+//------fin de guardar------
+
+const editarTiquet = async (e) => {
+  e.preventDefault()
+  try{
+      //const imageUrl2 = await obtenerImagen();
+      const docRef = doc(db, 'Usuario', id);
+      await updateDoc(docRef, {
+          
+          nombrePersona:nombre,
+          apellidoPersona: apellido,
+          celularPersona: celular,
+          emailPersona: email,
+          direccionPersona: direccion,
+          ciudadPersona: ciudad,
+          tipoPersona: tipo,
+          profesionPersona: profesion
+                    
+      })
+      
+
+      const nuevoArray = listaTiquet.map(
+          item => item.id === id ? {id: id, nombrePersona:nombre, apellidoPersona: apellido, celularPersona: celular, emailPersona: email, direccionPersona: direccion, ciudadPersona: ciudad, 
+            tipoPersona: tipo, profesionPersona: profesion
+          //mas iten
+          } : item
+      )
+      
+      setlistaTiquet(nuevoArray)
+      setNombre('')
+      setApellido('')
+      setCelular('')
+      setEmail('')
+      setDireccion('')
+      setCiudad('')
+      setTipo('')
+      setProfesion('')
+      setId('')
+      setModoEdicion(false)
+
+  }catch(error){
+      console.log(error)
+  }
+}
+
+//-----fin de editar
+
+const cancelar = () =>{
+  setModoEdicion(false)
+  setNombre('')
+  setApellido('')
+  setCelular('')
+  setEmail('')
+  setDireccion('')
+  setCiudad('')
+  setTipo('')
+  setProfesion('')
+  setId('')
+}
+
   return (
-    <div className='app-conten'>
-        <h2>Registrese</h2>
-        <div>
-        <form class="form-signin">            
-              
-              <input type="text" id="inputText" class="form-control text-center" placeholder="Nombre" required="" autofocus="" /><br />
-              <input type="text" id="inputText" class="form-control text-center" placeholder="Apellido" required="" autofocus="" /><br />
-              <input type="tel" id="inputTel" class="form-control text-center" placeholder="Telefono" required="" autofocus="" /><br />
-              <input type="email" id="inputEmail" class="form-control text-center" placeholder="Email address" required="" autofocus="" /><br />
-              <input type="password" id="inputPassword" class="form-control text-center" placeholder="Password" required="" /><br />
-              
-              <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
-              <p class="mt-5 mb-3 text-muted">© 2022</p>
-          </form>         
-        </div>
+    <div>
+        <div className="row">
+            <div className='col-4'></div>
+            <div className='col-4'>
+                
+            <form className='container justify-content-center' onSubmit={modoEdicion ? editarTiquet : guardarTiquet}>
+                <h3>Nuevo Servicio</h3>
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Ingrese Nombre'
+                value={nombre}
+                onChange={(e)=>setNombre(e.target.value)} required
+                />
+                 <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Ingrese Apellido'
+                value={apellido}
+                onChange={(e)=>setApellido(e.target.value)} required
+                />                  
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Ingrese Celular'
+                value={celular}
+                onChange={(e)=>setCelular(e.target.value)} required
+                />
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Ingrese Email'
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)} required
+                />
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Direccion'
+                value={direccion}
+                onChange={(e)=>setDireccion(e.target.value)} required
+                />
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Ciudad'
+                value={ciudad}
+                onChange={(e)=>setCiudad(e.target.value)} required
+                />                
+                <input type="text" 
+                className="form-control mb-3 text-center" 
+                placeholder='Tipo' 
+                value={tipo}
+                onChange={(e)=>setTipo(e.target.value)} required>
+                </input>
+                        
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder='Profesion' id="floatingTextarea" value={profesion}
+                  onChange={(e)=>setProfesion(e.target.value)} required></textarea>
+                  <label for="floatingTextarea">Profesion</label>                 
+                </div>
+                <br />
+                {
+                  modoEdicion ?
+                  (
+                      <>
+                          <button
+                          className='btn btn-warning btn-block'
+                          on='submit'>Editar</button>
+                          <Link to="/Servicios"><button
+                          className='btn btn-dark btn-block mx-2'
+                          onClick={()=>cancelar()}>Cancelar</button></Link>
+                      </>
+                  )
+                  :                    
+                  <button 
+                  type='submit'
+                  className='btn btn-primary btn-block'>
+                  Agregar
+                  </button>
+                                   
+                }
+                <Link to="/Servicios"><button
+                          className='btn btn-dark btn-block mx-2'
+                          onClick={()=>cancelar()}>Cancelar</button></Link>
+                
+            </form>
+            </div>
+            </div>
     </div>
   )
 }
